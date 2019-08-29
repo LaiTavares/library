@@ -1,26 +1,46 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import objeto from './Post.json';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class Post extends React.Component{
+  render(){
+    return(
+      <div>
+        <img className="imagem" src={this.props.url_imagem}></img>
+        <div>Titulo: {this.props.titulo}</div>
+      </div>
+    )
+  }
+}
+
+
+class App extends React.Component {
+
+  constructor(props){
+    super(props)
+    this.state={
+      posts:objeto.posts
+    }
+  }
+
+  render(){
+    return(
+      <div className="App">
+      {
+        this.state.posts.map((post, i) =>
+        <Post
+          url_imagem={post.url}
+          titulo={post.titulo}
+        />
+        )
+      }
+      </div> 
+    )
+   
+  }
+
 }
 
 export default App;
